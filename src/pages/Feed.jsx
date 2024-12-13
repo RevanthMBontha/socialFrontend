@@ -1,19 +1,22 @@
+import { useNavigate } from "react-router";
 import Post from "../components/Post";
 
 const Feed = () => {
-  const isTrue = true;
+  const navigate = useNavigate();
+
   return (
     <div className="flex h-screen w-screen flex-col overflow-y-auto">
       <div className="flex h-fit w-full flex-col items-start gap-y-2 p-2 shadow-md">
         <div className="flex items-center gap-x-3">
           <img
+            onClick={() => navigate(`/profile/${"idToGo"}`)}
             className="h-16 w-16 rounded-full bg-violet-300"
             src="/images/temp/pfp.jpg"
             alt=""
           />
           <div>
             <p className="text-sm text-neutral-400">Welcome back,</p>
-            <p className="text-xl">Johnathan Doe</p>
+            <p className="text-xl font-bold">Johnathan Doe</p>
           </div>
         </div>
       </div>
@@ -23,7 +26,7 @@ const Feed = () => {
             <Post key={index} index={index}>
               <Post.FeedHeader />
               <Post.FeedBody />
-              <Post.FeedFooter isLiked={true} />
+              <Post.FeedFooter />
             </Post>
           ),
         )}

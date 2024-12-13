@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import {
   FaRegHeart,
   FaHeart,
@@ -18,107 +19,85 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
 
-const FeedHeader = () => {
+const FeedHeader = ({
+  userId = "test",
+  userPfp = "/images/temp/pfp.jpg",
+  userName = "Aaron Doe",
+  createdAt = "2 hours ago",
+}) => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-grow-0 items-center gap-x-2 p-2">
       <img
+        onClick={() => navigate(`/profile/${userId}`)}
         className="h-14 w-14 rounded-full bg-blue-300"
-        src="/images/temp/pfp.jpg"
-        alt=""
+        src={userPfp}
+        alt={userName}
       />
       <div className="flex flex-col">
-        <span className="text-lg">Aaron Doe</span>
-        <span className="text-xs text-neutral-500">2 hours ago</span>
+        <span className="text-lg">{userName}</span>
+        <span className="text-xs text-neutral-500">{createdAt}</span>
       </div>
     </div>
   );
 };
 
-const FeedBody = () => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-    draggable: true,
-    adaptiveHeight: true,
-  };
+const FeedBody = ({
+  description = "Description goes here!",
+  media = [
+    "/images/login/01.jpg",
+    "/images/login/04.jpg",
+    "/images/login/09.jpg",
+  ],
+  postId = "test",
+}) => {
   return (
     <div className="relative flex flex-col gap-y-1">
       {/* Description */}
-      <p>Hey, here are some of the pics that I have taken recently!</p>
+      <p>{description}</p>
 
       {/* Images slider */}
       <div className="hide-scrollbar flex flex-grow items-center justify-start gap-x-2 overflow-x-auto rounded-xl">
-        {/* First Element */}
-        <div className="relative flex-shrink-0">
-          <img
-            className="h-48 w-auto rounded-xl object-cover"
-            src="/images/login/01.jpg"
-            alt=""
-          />
-          <span className="absolute right-2 top-2 rounded-full bg-white p-1 text-xs">
-            1/3
-          </span>
-        </div>
-
-        {/* Second Element */}
-        <div className="relative flex-shrink-0">
-          <img
-            className="h-48 w-auto rounded-xl object-cover"
-            src="/images/login/04.jpg"
-            alt=""
-          />
-          <span className="absolute right-2 top-2 rounded-full bg-white p-1 text-xs">
-            2/3
-          </span>
-        </div>
-
-        {/* Third Element */}
-        <div className="relative flex-shrink-0">
-          <img
-            className="h-48 w-auto rounded-xl object-cover"
-            src="/images/login/09.jpg"
-            alt=""
-          />
-          <span className="absolute right-2 top-2 rounded-full bg-white p-1 text-xs">
-            3/3
-          </span>
-        </div>
+        {/* Media Element */}
+        {media.map((el, idx) => (
+          <div key={`${postId}-${idx}`} className="relative flex-shrink-0">
+            <img
+              loading="lazy"
+              className="h-48 w-auto rounded-xl object-cover"
+              src={el}
+            />
+            <span className="absolute right-2 top-2 rounded-full bg-white p-1 text-xs">
+              {idx + 1}/{media.length}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-const FeedFooter = ({ isLiked }) => {
+const FeedFooter = ({ postId = "wergbewrw345gq4f" }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const shareContent = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Check this out!",
-          text: "I found this awesome content!",
-          url: "https://example.com",
-        })
-        .then(() => console.log("Content shared successfully!"))
-        .catch((error) => console.error("Error sharing content:", error));
-    } else {
-      alert("Sharing not supported on this browser.");
-    }
-  };
+  const [isLiked, setIsLiked] = useState(false);
 
   return (
     <div className="flex flex-grow-0 items-center justify-between p-2">
       {isLiked ? (
-        <span className="flex items-center gap-x-1">
+        <span
+          onClick={() => setIsLiked(false)}
+          className="flex items-center gap-x-1"
+        >
           <FaHeart className="text-red-500" size={24} />{" "}
           <p className="text-lg text-red-500">{24}</p>
         </span>
       ) : (
-        <FaRegHeart className="text-neutral-500" size={24} />
+        <span
+          onClick={() => setIsLiked(true)}
+          className="flex items-center gap-x-1"
+        >
+          <FaRegHeart className="text-gray-500" size={24} />{" "}
+          <p className="text-lg text-gray-500">{24}</p>
+        </span>
       )}
       <Button
         onClick={() => setIsModalOpen(true)}
@@ -127,6 +106,7 @@ const FeedFooter = ({ isLiked }) => {
         Share <AiOutlineSend />
       </Button>
       <PostModal
+        postId={postId}
         isModalOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
@@ -134,7 +114,8 @@ const FeedFooter = ({ isLiked }) => {
   );
 };
 
-const PostModal = ({ isModalOpen, onClose }) => {
+const PostModal = ({ isModalOpen, onClose, postId }) => {
+  // TODO: Add onClick Event Listeners to all the buttons to share to the concerned app
   return (
     <Modal isOpen={isModalOpen} onClose={onClose} title="Share Post">
       <div className="flex flex-col gap-y-6">

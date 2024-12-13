@@ -7,3 +7,16 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* For modern browsers */
+.hide-scrollbar {
+  scrollbar-width: none; /* For Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Edge */
+}
+
+.relative {
+  position: relative;
+}

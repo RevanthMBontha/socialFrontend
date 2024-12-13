@@ -5,6 +5,7 @@ import Feed from "./pages/Feed";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import IsNotAuthRoute from "./layouts/IsNotAuthRoute";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
@@ -13,11 +14,8 @@ function App() {
         <Routes>
           <Route element={<IsAuthRoute />}>
             <Route path="/" element={<Feed />} />
-            <Route
-              path="profile/:profileId"
-              element={<Profile />}
-              errorElement={<Error />}
-            />
+            <Route path="profile/:profileId" element={<Profile />} />
+            <Route path="profile/:profileId/edit" element={<EditProfile />} />
           </Route>
           <Route element={<IsNotAuthRoute />}>
             <Route path="login" element={<Login />} />

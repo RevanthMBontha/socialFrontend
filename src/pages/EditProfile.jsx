@@ -7,11 +7,13 @@ import { useNavigate } from "react-router";
 const EditProfile = () => {
   const navigate = useNavigate();
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const [userDetails, setUserDetails] = useState({
-    name: "Jonathan Doe",
-    bio: "Bio Description goes here! You can write about yourself in a brief manner here!",
-    pfp: "/images/temp/pfp.jpg",
-    bgImg: "/images/temp/bgImg.jpg",
+    name: user.name,
+    bio: user.bio,
+    pfp: user.pfp,
+    bgImg: user.bgImg,
   });
 
   return (
@@ -34,12 +36,8 @@ const EditProfile = () => {
           <img
             className="h-full w-full bg-red-300 object-cover"
             src={userDetails.bgImg}
-            alt=""
+            alt="Background image"
           />
-          {/* Button to edit background image */}
-          <Button className="absolute bottom-2 right-2 z-20 flex h-fit w-fit items-center justify-center rounded-full border border-black bg-neutral-100 p-2 hover:bg-neutral-300">
-            <RiPencilFill className="text-black" size={24} />
-          </Button>
         </div>
 
         {/* Profile Image */}
@@ -47,8 +45,8 @@ const EditProfile = () => {
           <div className="relative h-full w-full rounded-full bg-blue-300">
             <img
               className="h-full w-full rounded-full object-cover"
-              src="/images/temp/pfp.jpg"
-              alt=""
+              src={user.pfp}
+              alt={user.name}
             />
             <div className="absolute bottom-0 right-0 z-20 flex h-fit w-fit items-center justify-center rounded-full border border-black bg-neutral-100 p-2 hover:bg-neutral-300">
               <RiPencilFill className="text-black" size={24} />

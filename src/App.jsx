@@ -11,7 +11,7 @@ import CameraCapture from "./pages/CameraCapture";
 
 function App() {
   return (
-    <div className="h-screen w-screen overflow-y-auto">
+    <div className="mx-auto h-screen w-screen overflow-y-auto">
       <BrowserRouter>
         <Routes>
           <Route element={<IsAuthRoute />}>

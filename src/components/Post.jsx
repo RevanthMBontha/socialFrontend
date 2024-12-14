@@ -15,8 +15,6 @@ import { RiTelegram2Fill } from "react-icons/ri";
 import Button from "./Button";
 import Modal from "./Modal";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { useState } from "react";
 
 const FeedHeader = ({
@@ -76,7 +74,7 @@ const FeedBody = ({
   );
 };
 
-const FeedFooter = ({ postId = "wergbewrw345gq4f" }) => {
+const FeedFooter = ({ postId = "wergbewrw345gq4f", likes }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -88,7 +86,7 @@ const FeedFooter = ({ postId = "wergbewrw345gq4f" }) => {
           className="flex items-center gap-x-1"
         >
           <FaHeart className="text-red-500" size={24} />{" "}
-          <p className="text-lg text-red-500">{24}</p>
+          <p className="text-lg text-red-500">{likes?.length}</p>
         </span>
       ) : (
         <span
@@ -96,7 +94,7 @@ const FeedFooter = ({ postId = "wergbewrw345gq4f" }) => {
           className="flex items-center gap-x-1"
         >
           <FaRegHeart className="text-gray-500" size={24} />{" "}
-          <p className="text-lg text-gray-500">{24}</p>
+          <p className="text-lg text-gray-500">{likes?.length}</p>
         </span>
       )}
       <Button
@@ -192,7 +190,7 @@ const PostModal = ({ isModalOpen, onClose, postId }) => {
           <p className="text-xl">Post Link</p>
           <div className="flex h-12 items-center justify-between rounded-lg bg-gray-100 p-2">
             <p className="text-xs text-gray-400">
-              https://testlink.com/post/awetasrghaeryr
+              {`https://testapplication.com/${postId}`.slice(0, 30)}...
             </p>
             <Button className="p-1">
               <IoIosCopy

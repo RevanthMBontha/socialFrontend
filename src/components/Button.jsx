@@ -1,10 +1,10 @@
 import { twMerge } from "tailwind-merge";
 
-const Button = ({ className, children, onClick }) => {
+const Button = ({ className, children, onClick, disabled }) => {
   const styling = twMerge("p-2 px-4", className);
 
   return (
-    <button onClick={onClick} className={styling}>
+    <button disabled={disabled} onClick={onClick} className={styling}>
       {children}
     </button>
   );

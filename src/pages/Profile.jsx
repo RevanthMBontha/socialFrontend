@@ -34,9 +34,13 @@ const Profile = () => {
         />
       </div>
 
+      {/* TODO: Add the correct path here to navigate to edit page */}
       {/* Edit Profile Button */}
       <div className="flex w-full justify-end py-2 pr-4">
-        <Button className="rounded-full border border-black px-16 text-lg hover:bg-neutral-300">
+        <Button
+          onClick={() => navigate("/profile/:id/edit")}
+          className="rounded-full border border-black px-16 text-lg hover:bg-neutral-300"
+        >
           Edit Profile
         </Button>
       </div>
@@ -229,8 +233,12 @@ const Profile = () => {
           </>
         </div>
       </div>
+      {/* Create New Post Button */}
       <div className="fixed bottom-3 right-3">
-        <Button className="rounded-full bg-black p-3">
+        <Button
+          onClick={() => navigate("/create")}
+          className="rounded-full bg-black p-3"
+        >
           <TiPlus className="text-white" size={36} />
         </Button>
       </div>

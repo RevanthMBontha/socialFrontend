@@ -6,6 +6,8 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import IsNotAuthRoute from "./layouts/IsNotAuthRoute";
 import EditProfile from "./pages/EditProfile";
+import NewPost from "./pages/NewPost";
+import CameraCapture from "./pages/CameraCapture";
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
             <Route path="/" element={<Feed />} />
             <Route path="profile/:profileId" element={<Profile />} />
             <Route path="profile/:profileId/edit" element={<EditProfile />} />
+            <Route path="/create" element={<NewPost />} />
+            <Route path="/capture" element={<CameraCapture />} />
           </Route>
           <Route element={<IsNotAuthRoute />}>
             <Route path="login" element={<Login />} />

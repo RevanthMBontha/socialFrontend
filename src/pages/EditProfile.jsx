@@ -20,7 +20,7 @@ const EditProfile = () => {
       <div className="absolute left-3 top-3 z-10">
         {/* TODO: Add Proper redirection to the old page here */}
         <Button
-          onClick={() => navigate("/profile/id")}
+          onClick={() => navigate(-1)}
           className="rounded-full bg-white/20 p-3 hover:bg-white/40"
         >
           <FaArrowLeftLong className="text-white" size={24} />
@@ -36,21 +36,23 @@ const EditProfile = () => {
             src={userDetails.bgImg}
             alt=""
           />
-          <Button className="absolute bottom-2 right-2 z-20 flex h-fit w-fit items-center justify-center rounded-full border border-black bg-neutral-300 p-2 hover:bg-neutral-400">
+          {/* Button to edit background image */}
+          <Button className="absolute bottom-2 right-2 z-20 flex h-fit w-fit items-center justify-center rounded-full border border-black bg-neutral-100 p-2 hover:bg-neutral-300">
             <RiPencilFill className="text-black" size={24} />
           </Button>
         </div>
+
         {/* Profile Image */}
-        <div className="absolute bottom-0 left-4 z-10 h-32 w-32 flex-shrink-0 translate-y-1/2 rounded-full border-4 border-white">
-          <div className="relative h-fit w-fit">
+        <div className="absolute bottom-0 left-4 z-10 h-32 w-32 translate-y-1/2 rounded-full border-4 border-white bg-red-300">
+          <div className="relative h-full w-full rounded-full bg-blue-300">
             <img
-              className="h-32 w-32 rounded-full"
-              src={userDetails.pfp}
-              alt={userDetails.name}
+              className="h-full w-full rounded-full object-cover"
+              src="/images/temp/pfp.jpg"
+              alt=""
             />
-            <Button className="absolute bottom-0 right-0 z-20 flex h-fit w-fit items-center justify-center rounded-full border border-black bg-neutral-300 p-2 hover:bg-neutral-400">
+            <div className="absolute bottom-0 right-0 z-20 flex h-fit w-fit items-center justify-center rounded-full border border-black bg-neutral-100 p-2 hover:bg-neutral-300">
               <RiPencilFill className="text-black" size={24} />
-            </Button>
+            </div>
           </div>
         </div>
       </div>
